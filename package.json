@@ -1,0 +1,53 @@
+{
+  "name": "html-plugin",
+  "version": "0.0.1",
+  "description": "Create HTML files to serve your webpack bundles",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "pretest": "npm run build",
+    "test": "nyc --instrument false lsc test/start",
+    "posttest": "nyc report -r lcov -r json && mv coverage/coverage-final.json coverage/coverage.json",
+    "preversion": "npm test",
+    "prepublishOnly": "npm test"
+  },
+  "repository": "dk00/html-plugin",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "html"
+  ],
+  "license": "Unlicense",
+  "bugs": "https://github.com/dk00/html-plugin/issues",
+  "homepage": "https://github.com/dk00/html-plugin#readme",
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "babel-core": "",
+    "babel-plugin-istanbul": "",
+    "babel-plugin-transform-es2015-modules-commonjs": "",
+    "babel-plugin-transform-react-jsx": "",
+    "babel-preset-stage-0": "",
+    "babel-register": "",
+    "cheerio": "",
+    "css-hot-loader": "",
+    "css-loader": "",
+    "extract-text-webpack-plugin": "",
+    "livescript": "",
+    "livescript-next": "",
+    "memory-fs": "",
+    "nyc": "",
+    "preact": "",
+    "preact-render-to-string": "",
+    "rollup": "",
+    "rollup-plugin-babel": "",
+    "rollup-plugin-node-resolve": "",
+    "tape": "",
+    "webpack": ""
+  },
+  "peerDependencies": {
+    "preact": "",
+    "preact-render-to-string": ""
+  }
+}
