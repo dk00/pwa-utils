@@ -3,9 +3,8 @@ import
   \./toposort : toposort
 
 function create-template component
-  {h} = require \preact
-  render-to-string = require \preact-render-to-string
-  -> '<!DOCTYPE html>\n' + render-to-string (component h) it
+  h = require \vhtml
+  -> '<!DOCTYPE html>\n' + (component h) it
 
 function webpack-asset source
   source: -> source

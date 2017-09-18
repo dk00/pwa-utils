@@ -1,6 +1,6 @@
 {
   "name": "html-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create HTML files to serve your webpack bundles",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "pretest": "npm run build",
     "test": "nyc --instrument false lsc test/start",
     "posttest": "nyc report -r lcov -r json && mv coverage/coverage-final.json coverage/coverage.json",
-    "preversion": "npm test",
+    "preversion": "npm t",
     "prepublishOnly": "npm test"
   },
   "repository": "dk00/html-plugin",
@@ -38,16 +38,14 @@
     "livescript-next": "",
     "memory-fs": "",
     "nyc": "",
-    "preact": "",
-    "preact-render-to-string": "",
     "rollup": "",
     "rollup-plugin-babel": "",
     "rollup-plugin-node-resolve": "",
     "tape": "",
+    "vhtml": "",
     "webpack": ""
   },
   "peerDependencies": {
-    "preact": "",
-    "preact-render-to-string": ""
+    "vhtml": ""
   }
 }

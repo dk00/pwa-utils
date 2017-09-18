@@ -57,7 +57,7 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
   options =
     entry:
       main: \./test/fixtures/entry.js
-      vendor: <[preact]>
+      vendor: <[vhtml]>
     output:
       path: output-path
       filename: '[name].js'

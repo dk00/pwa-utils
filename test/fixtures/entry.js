@@ -1,4 +1,4 @@
-import {h} from 'preact'
+import h from 'vhtml'
 import './reset.css'
 
 const main = () => 1
