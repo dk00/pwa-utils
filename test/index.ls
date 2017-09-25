@@ -12,6 +12,8 @@ output-path = join process.cwd!, \www
 function load-index fs
   cheerio.load <| fs.read-file-sync (join output-path, \index.html) .to-string!
 
+function report-error => console.log it?compilation?errors || it
+
 test 'Topological sort' (t) ->
   nodes =
     \0 : []
@@ -31,7 +33,7 @@ test 'Generate a index.html file to serve single chunk' (t) ->
       filename: \bundle.js
     module: rules:
       * test: /\.css$/
-        use: [\css-hot-loader]concat ExtractTextPlugin.extract use: [\css-loader]
+        use: ExtractTextPlugin.extract use: [\css-loader]
       ...
     plugins:
       new ExtractTextPlugin \styles.css
@@ -50,7 +52,7 @@ test 'Generate a index.html file to serve single chunk' (t) ->
     t.is actual, expected, 'serve extracted style files'
 
     t.end!
-  .catch -> console.log it?compilation?errors || it
+  .catch report-error
 
 test 'Generate a index.html file to serve multiple chunks' (t) ->
   chunks = <[vendor runtime]>
@@ -63,7 +65,10 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
       filename: '[name].js'
     module: rules:
       * test: /\.css$/
-        use: [\css-hot-loader]concat ExtractTextPlugin.extract use: [\css-loader]
+        use:
+          * loader: \file-loader options: name: '[name].css'
+          \extract-loader
+          \css-loader
       ...
     plugins:
       new ExtractTextPlugin \styles.css
@@ -73,5 +78,11 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
     actual = $ \script .get!map (.attribs.src) .join ' '
     expected = 'runtime.js vendor.js main.js'
     t.is actual, expected, 'load chunks ordered by their dependencies'
+
+    actual = $ \link .get!map (.attribs.href)
+    .filter (.ends-with \css) .join ' '
+    expected = \reset.css
+    t.is actual, expected, 'inject css files generated with file-loader'
+
     t.end!
-  .catch -> console.log it?compilation?errors || it
+  .catch report-error

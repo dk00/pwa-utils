@@ -1,6 +1,6 @@
 {
   "name": "html-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create HTML files to serve your webpack bundles",
   "main": "lib/index.js",
   "scripts": {
@@ -31,8 +31,9 @@
     "babel-preset-stage-0": "",
     "babel-register": "",
     "cheerio": "",
-    "css-hot-loader": "",
     "css-loader": "",
+    "extract-loader": "",
+    "file-loader": "",
     "extract-text-webpack-plugin": "",
     "livescript": "",
     "livescript-next": "",

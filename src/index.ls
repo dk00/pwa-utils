@@ -10,11 +10,13 @@ function webpack-asset source
   source: -> source
   size: -> source.length
 
-function manifest {chunks}
+function manifest {chunks, assets}
   nodes = Object.assign ...chunks.map -> (it.id): it.parents.map (.id)
   files = Object.assign ...chunks.map -> (it.id): it.files
-  parts = toposort nodes .map (files.)
-  list = []concat ...parts
+  sorted-chunks = toposort nodes .map (files.)
+  chunk-files = []concat ...sorted-chunks
+  list = Object.keys assets .filter -> !chunk-files.includes it
+  .concat chunk-files
   styles: list.filter /.css$/~test
   scripts: list.filter /.js$/~test
 
