@@ -59,7 +59,7 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
   options =
     entry:
       main: \./test/fixtures/entry.js
-      vendor: <[vhtml]>
+      vendor: <[preact]>
     output:
       path: output-path
       filename: '[name].js'
@@ -73,7 +73,7 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
     plugins:
       new ExtractTextPlugin \styles.css
       ...chunks.map (name) -> new webpack.optimize.CommonsChunkPlugin {name}
-      new HtmlPlugin {}
+      new HtmlPlugin content: -> \content
   run-webpack options .then load-index .then ($) ->
     actual = $ \script .get!map (.attribs.src) .join ' '
     expected = 'runtime.js vendor.js main.js'
@@ -83,6 +83,10 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
     .filter (.ends-with \css) .join ' '
     expected = \reset.css
     t.is actual, expected, 'inject css files generated with file-loader'
+
+    actual = $ \#root .text!trim!
+    expected = \content
+    t.is actual, expected, 'add content to generated html'
 
     t.end!
   .catch report-error

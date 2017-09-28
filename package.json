@@ -1,6 +1,6 @@
 {
   "name": "html-plugin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create HTML files to serve your webpack bundles",
   "main": "lib/index.js",
   "scripts": {
@@ -39,14 +39,15 @@
     "livescript-next": "",
     "memory-fs": "",
     "nyc": "",
+    "preact": "",
+    "preact-render-to-string": "",
     "rollup": "",
     "rollup-plugin-babel": "",
     "rollup-plugin-node-resolve": "",
     "tape": "",
-    "vhtml": "",
     "webpack": ""
   },
   "peerDependencies": {
-    "vhtml": ""
+    "preact-render-to-string": ""
   }
 }

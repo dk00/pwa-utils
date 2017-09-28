@@ -3,8 +3,9 @@ import
   \./toposort : toposort
 
 function create-template component
-  h = require \vhtml
-  -> '<!DOCTYPE html>\n' + (component h) it
+  {h} = require \preact
+  render-string = require \preact-render-to-string
+  -> '<!DOCTYPE html>\n' + render-string (component h) it
 
 function webpack-asset source
   source: -> source
@@ -20,11 +21,10 @@ function manifest {chunks, assets}
   styles: list.filter /.css$/~test
   scripts: list.filter /.js$/~test
 
-function generate compilation, {title, filename=\index.html}
-  props = Object.assign {title} manifest compilation
+function generate compilation, {filename=\index.html}: options
+  props = Object.assign {compilation} (manifest compilation), options
   render-template = create-template default-template
-  result = render-template props
-  (filename): webpack-asset result
+  (filename): webpack-asset render-template props
 
 !function HtmlPlugin options
   @options = options

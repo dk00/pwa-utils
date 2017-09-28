@@ -1,5 +1,6 @@
 export default h => ({
-  title, name=title, styles, scripts, content='',
+  title, name=title, styles, scripts,
+  content: Content='', rootAttributes={id: 'root'},
   lang="en", themeColor="#000", manifest="/manifest.json", favicon="/favicon.png"
 }) =>
 <html lang={lang}>
@@ -20,7 +21,9 @@ export default h => ({
 </head>
 
 <body>
-  <div id="root">{content}</div>
+  <div {...rootAttributes}>
+    {typeof(Content) == 'string'? Content: <Content />}
+  </div>
   {scripts.map(src =>
     <script src={src}></script>
   )}
