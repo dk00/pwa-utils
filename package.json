@@ -1,6 +1,6 @@
 {
   "name": "html-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Create HTML files to serve your webpack bundles",
   "main": "lib/index.js",
   "scripts": {

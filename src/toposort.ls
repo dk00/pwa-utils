@@ -7,7 +7,7 @@ function toposort nodes
     head = nodes[it]map (id) ->
       deps[id] -= 1
       if deps[id] == 0 then cut id else []
-    []concat ...head, it
-  []concat ...start.map cut
+    []concat it, ...head
+  []concat ...start.map cut .reverse!
 
 export default: toposort

@@ -16,13 +16,19 @@ function report-error => console.log it?compilation?errors || it
 
 test 'Topological sort' (t) ->
   nodes =
-    \0 : []
     \1 : <[0 2]>
     \2 : <[0]>
+    \0 : []
 
   actual = toposort nodes
   expected = <[0 2 1]>
   t.same actual, expected
+
+  nodes = \0 : [\2] \1 : [\2] \2 : []
+  actual = toposort nodes
+  expected = <[2 1 0]>
+  t.same actual, expected
+
   t.end!
 
 test 'Generate a index.html file to serve single chunk' (t) ->
