@@ -50,11 +50,11 @@ test 'Generate a index.html file to serve single chunk' (t) ->
     t.ok actual, 'have root element in body'
 
     actual = $ \script .attr \src
-    expected = \bundle.js
+    expected = \/bundle.js
     t.is actual, expected, 'serve the generated bundle'
 
     actual = $ 'link[rel=stylesheet]' .attr \href
-    expected = \styles.css
+    expected = \/styles.css
     t.is actual, expected, 'serve extracted style files'
 
     t.end!
@@ -79,7 +79,7 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
     plugins:
       new ExtractTextPlugin \styles.css
       ...chunks.map (name) -> new webpack.optimize.CommonsChunkPlugin {name}
-      new HtmlPlugin content: -> \content
+      new HtmlPlugin prefix: '' content: -> \content
   run-webpack options .then load-index .then ($) ->
     actual = $ \script .get!map (.attribs.src) .join ' '
     expected = 'runtime.js vendor.js main.js'

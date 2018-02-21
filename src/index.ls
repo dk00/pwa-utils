@@ -11,18 +11,18 @@ function webpack-asset source
   source: -> source
   size: -> source.length
 
-function manifest {chunks, assets}
+function manifest {chunks, assets} {prefix=\/}
   nodes = Object.assign ...chunks.map -> (it.id): it.parents.map (.id)
   files = Object.assign ...chunks.map -> (it.id): it.files
   sorted-chunks = toposort nodes .map (files.)
   chunk-files = []concat ...sorted-chunks
   list = Object.keys assets .filter -> !chunk-files.includes it
-  .concat chunk-files
+  .concat chunk-files .map -> prefix + it
   styles: list.filter /.css$/~test
   scripts: list.filter /.js$/~test
 
 function generate compilation, {filename=\index.html}: options
-  props = Object.assign {compilation} (manifest compilation), options
+  props = Object.assign {compilation} (manifest compilation, options), options
   render-template = create-template default-template
   (filename): webpack-asset render-template props
 

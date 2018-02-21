@@ -9,7 +9,7 @@
     "test": "nyc --instrument false lsc test/start",
     "posttest": "nyc report -r lcov -r json && mv coverage/coverage-final.json coverage/coverage.json",
     "preversion": "npm t",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm t"
   },
   "repository": "dk00/html-plugin",
   "keywords": [
