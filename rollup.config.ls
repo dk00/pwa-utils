@@ -3,10 +3,10 @@ import
   \rollup-plugin-babel : babel
 
 config =
-  input: \src/index.ls output: file: \lib/index.js format: \cjs
+  input: \src/index.ls
+  output: file: \lib/index.js format: \cjs sourcemap: true strict: false
   plugins:
     resolve jsnext: true extensions: <[.ls .jsx]>
     babel require \./.babelrc
-  sourcemap: true strict: false
 
 export default: config

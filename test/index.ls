@@ -61,14 +61,9 @@ test 'Generate a index.html file to serve single chunk' (t) ->
   .catch report-error
 
 test 'Generate a index.html file to serve multiple chunks' (t) ->
-  chunks = <[vendor runtime]>
   options =
-    entry:
-      main: \./test/fixtures/entry.js
-      vendor: <[preact]>
-    output:
-      path: output-path
-      filename: '[name].js'
+    entry: \./test/fixtures/entry.js
+    output: path: output-path
     module: rules:
       * test: /\.css$/
         use:
@@ -78,12 +73,22 @@ test 'Generate a index.html file to serve multiple chunks' (t) ->
       ...
     plugins:
       new ExtractTextPlugin \styles.css
-      ...chunks.map (name) -> new webpack.optimize.CommonsChunkPlugin {name}
       new HtmlPlugin prefix: '' content: -> \content
+    optimization:
+      runtime-chunk: \single
+      split-chunks:
+        chunks: \all
+        automatic-name-delimiter: \.
+
   run-webpack options .then load-index .then ($) ->
-    actual = $ \script .get!map (.attribs.src) .join ' '
-    expected = 'runtime.js vendor.js main.js'
-    t.is actual, expected, 'load chunks ordered by their dependencies'
+    chunks = $ \script .get!map (.attribs.src)
+
+    actual = chunks.length > 1
+    t.ok actual, 'split into some chunks'
+
+    actual = chunks.slice -1 .0
+    expected = \main.js
+    t.is actual, expected, 'load main chunk at last'
 
     actual = $ \link .get!map (.attribs.href)
     .filter (.ends-with \css) .join ' '

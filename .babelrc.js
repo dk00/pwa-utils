@@ -1,7 +1,7 @@
 module.exports = {
-  parserOpts: {
-    parser: 'livescript-next'
-  },
-  presets: ['stage-0'],
-  plugins: [['transform-react-jsx', { pragma: 'h', useBuiltIns: true }]]
+  presets: ['@babel/stage-0'],
+  plugins: [
+    'livescript',
+    ['@babel/transform-react-jsx', { pragma: 'h', useBuiltIns: true }]
+  ]
 }

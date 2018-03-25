@@ -11,13 +11,16 @@ function webpack-asset source
   source: -> source
   size: -> source.length
 
-function manifest {chunks, assets} {prefix=\/}
-  nodes = Object.assign ...chunks.map -> (it.id): it.parents.map (.id)
-  files = Object.assign ...chunks.map -> (it.id): it.files
-  sorted-chunks = toposort nodes .map (files.)
-  chunk-files = []concat ...sorted-chunks
-  list = Object.keys assets .filter -> !chunk-files.includes it
-  .concat chunk-files .map -> prefix + it
+function manifest {chunk-groups, assets} {prefix=\/}
+  #TODO cases to generate groups
+  nodes = Object.assign ...chunk-groups.map ->
+    (it.id): it.get-parents!map (.id)
+  group-ref = Object.assign ...chunk-groups.map -> (it.id): it
+  sorted-groups = toposort nodes .map (group-ref.)
+  file-list = []concat ...sorted-groups.map ->
+    []concat ...it.chunks.map (.files)
+  merged = Object.assign {} assets, ...file-list.map -> (it): true
+  list = Object.keys merged .map -> prefix + it
   styles: list.filter /.css$/~test
   scripts: list.filter /.js$/~test
 
@@ -30,8 +33,7 @@ function generate compilation, {filename=\index.html}: options
   @options = options
 
 HtmlPlugin::apply = (compiler) ->
-  compiler.plugin \emit ({assets}: compilation, callback) ~>
+  compiler.hooks.emit.tap \html-plugin ({assets}: compilation) ~>
     Object.assign assets, generate compilation, @options
-    callback!
 
 module.exports = HtmlPlugin
