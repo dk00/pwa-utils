@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['@babel/stage-0'],
+  presets: ['upcoming'],
   plugins: [
     'livescript',
     ['@babel/transform-react-jsx', { pragma: 'h', useBuiltIns: true }]
