@@ -1,34 +1,24 @@
-# PWA Utils
-
-Create manifest, icon, HTML files for PWA.
+# pwa-utils
 
 [![build status](https://travis-ci.org/dk00/pwa-utils.svg)](//travis-ci.org/dk00/pwa-utils)
 [![coverage](https://codecov.io/gh/dk00/pwa-utils/branch/master/graph/badge.svg)](//codecov.io/gh/dk00/pwa-utils)
 [![npm](https://img.shields.io/npm/v/pwa-utils.svg)](//npm.im/pwa-utils)
 [![dependencies](https://david-dm.org/dk00/pwa-utils/status.svg)](//david-dm.org/dk00/pwa-utils)
 
-precache-manifest.js
-favicon.png
-manifest.json
-index.html
-
-This plugin aims to create `index.html` for PWAs, with good default template built-in, and let you customize with simple configuration.
-
-You can also provide your own templates in the same way you compose apps - JSX and React components.
+Generate `manifest.json`, `index.html`, `favicon.png` for creating Progressive Web Apps.
 
 ## Installation
 
-Install the plugin with npm:
+Install the package with npm:
 
-`$ npm i -D pwa-utils react-dom`
+`$ npm i -D pwa-utils`
 
-# Usage
+## Usage
 
 Add the plugin to webpack config:
 
 ```diff
-+ const {GenerateWebApp} = require('pwa-utils')
-
++ const GenerateWebApp = require('pwa-utils')
   module.exports = {
     entry: 'index.js',
     output: {
@@ -37,13 +27,20 @@ Add the plugin to webpack config:
     },
 +   plugins: [
 +     new GenerateWebApp({
-+       title: 'My App'
++       name: 'My App'
 +     })
 +   ]
   }
 ```
 
-This will generate `dist/index.html`:
+and add runtime into your entry file:
+
+```js
+import {setupWebApp} from 'pwa-utils'
+setupWebApp()
+```
+
+This will copy `src/favicon.png` to `dist/` and generate `dist/manifest.json`, `dist/index.html`:
 
 ```html
 <!DOCTYPE html>
@@ -54,16 +51,16 @@ This will generate `dist/index.html`:
   <meta charset="utf-8" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#000" />
+  <meta name="theme-color" content="#00000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" href="/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.png" />
 </head>
 
 <body>
   <div id="root"></div>
-  <script src="/bundle.js"></script>
+  <script src="bundle.js"></script>
 </body>
 
 </html>
@@ -71,9 +68,40 @@ This will generate `dist/index.html`:
 
 ## Options
 
-- filename
-- title / name
-- lang
-- themeColor
-- manifest
-- favicon
+**`name`**
+
+**inlineFirstRender**
+
+(true | false, default: true)
+
+Add rendered HTML to root element of `index.html`, to get first meaningful paint before js is loaded.
+
+**inlineCritical**
+
+(true | false | string, default: true)
+
+Inline `index.css` or specified file to reduce render-blocking.
+
+**styles**
+
+Override stylesheets to be loaded in `index.html`. Useful when
+
+[`manifest.json` options](https://developers.google.com/web/fundamentals/web-app-manifest/):
+
+`shortName`, `icons`, `backgroundColor`, `themeColor`, `startUrl`
+
+Default options is:
+
+```yml
+icons: [
+  {
+    src: '/favicon.png',
+    type: 'image/png',
+    sizes: ['192x192', '512x512']
+  }
+]
+display: 'standalone'
+backgroundColor: '#000000'
+themeColor: '#000000'
+startUrl: '/?source=pwa'
+```
