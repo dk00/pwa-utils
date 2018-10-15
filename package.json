@@ -45,10 +45,10 @@
     "nyc": "",
     "preact": "",
     "preact-render-to-string": "",
+    "riteway": "",
     "rollup": "",
-    "rollup-plugin-babel": "beta",
+    "rollup-plugin-babel": "4.0.0-beta.8",
     "rollup-plugin-node-resolve": "",
-    "tape": "",
     "webpack": ""
   },
   "peerDependencies": {
