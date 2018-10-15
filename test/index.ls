@@ -1,2 +1,5 @@
 require \../register <| plugins: [\istanbul]
-require \./main
+
+{describe} = require \riteway
+
+describe \Utilties, (require './utils' .default)

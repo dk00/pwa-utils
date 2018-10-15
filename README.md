@@ -95,9 +95,14 @@ Default options is:
 ```yml
 icons: [
   {
-    src: '/favicon.png',
-    type: 'image/png',
-    sizes: ['192x192', '512x512']
+    src: '/favicon.png'
+    type: 'image/png'
+    sizes: '192x192'
+  }
+  {
+    src: '/favicon.png'
+    type: 'image/png'
+    sizes: '512x512'
   }
 ]
 display: 'standalone'
