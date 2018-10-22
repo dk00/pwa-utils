@@ -1,7 +1,7 @@
 export default h => ({
   name, title=name, styles=[], scripts=[],
   content: Content='', rootAttributes={id: 'root'},
-  lang='en', themeColor='#000', manifest='/manifest.json', favicon='/favicon.png'
+  lang='en', themeColor='#00000', manifest='/manifest.json', favicon='/favicon.png'
 }) =>
 <html lang={lang}>
 

@@ -18,7 +18,7 @@ Install the package with npm:
 Add the plugin to webpack config:
 
 ```diff
-+ const GenerateWebApp = require('pwa-utils')
++ const {GenerateWebApp} = require('pwa-utils')
   module.exports = {
     entry: 'index.js',
     output: {
@@ -70,21 +70,22 @@ This will copy `src/favicon.png` to `dist/` and generate `dist/manifest.json`, `
 
 **`name`**
 
-**inlineFirstRender**
+**inlineFirstRender** (Coming soon)
 
 (true | false, default: true)
 
 Add rendered HTML to root element of `index.html`, to get first meaningful paint before js is loaded.
 
-**inlineCritical**
+**inlineCritical** (Coming soon)
 
 (true | false | string, default: true)
 
 Inline `index.css` or specified file to reduce render-blocking.
 
-**styles**
 
-Override stylesheets to be loaded in `index.html`. Useful when
+**scripts / styles**
+
+Override scripts or stylesheets to be included in `index.html`.
 
 [`manifest.json` options](https://developers.google.com/web/fundamentals/web-app-manifest/):
 
@@ -110,3 +111,11 @@ backgroundColor: '#000000'
 themeColor: '#000000'
 startUrl: '/?source=pwa'
 ```
+
+## Technical
+
+`emit` event of Webpack is hooked to add `.js` / `.css` assets.
+
+Js bundles need to be includes in proper order to work correctly, so these are sorted topologically.
+
+CSS files are added in original order.
