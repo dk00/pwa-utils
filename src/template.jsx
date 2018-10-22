@@ -1,12 +1,12 @@
 export default h => ({
-  title, name=title, styles, scripts,
+  name, title=name, styles=[], scripts=[],
   content: Content='', rootAttributes={id: 'root'},
-  lang="en", themeColor="#000", manifest="/manifest.json", favicon="/favicon.png"
+  lang='en', themeColor='#000', manifest='/manifest.json', favicon='/favicon.png'
 }) =>
 <html lang={lang}>
 
 <head>
-  <title>{name}</title>
+  <title>{title}</title>
   <meta charset="utf-8" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,7 +22,7 @@ export default h => ({
 
 <body>
   <div {...rootAttributes}>
-    {typeof(Content) == 'string'? Content: <Content />}
+    {typeof Content === 'string'? Content: <Content />}
   </div>
   {scripts.map(src =>
     <script src={src}></script>
