@@ -25,7 +25,7 @@ function html-props {chunk-groups, assets} {prefix='/' public-path=prefix}
 
 function generate compilation, options
   props = Object.assign {} (html-props compilation, options), options
-  'index.html': webpack-asset html {props}
+  'index.html': webpack-asset html {props, React: options.React}
   'manifest.json': webpack-asset JSON.stringify (manifest options),, 2
 
 !function GenerateWebApp options

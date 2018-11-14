@@ -1,6 +1,6 @@
 {
   "name": "pwa-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create manifest, icon, HTML files for PWA",
   "module": "dist/index.esm.js",
   "main": "lib/index.js",

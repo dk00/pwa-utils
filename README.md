@@ -112,6 +112,20 @@ themeColor: '#000000'
 startUrl: '/?source=pwa'
 ```
 
+**React**
+
+Override React implementation.
+
+
+```yml
+{
+  React: {
+    createElement: require('custom-react')
+    renderToString: require('custom-react-dom').renderToString()
+  }
+}
+```
+
 ## Technical
 
 `emit` event of Webpack is hooked to add `.js` / `.css` assets.
