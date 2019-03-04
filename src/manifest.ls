@@ -15,6 +15,7 @@ function manifest {
   startUrl='/?source=pwa'
 }
   name: name
+  short_name: name
   icons: icons
   display: display
   background_color: backgroundColor

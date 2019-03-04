@@ -24,6 +24,7 @@ async function main t
     actual: manifest name: 'My App'
     expected:
       name: 'My App'
+      short_name: 'My App'
       icons:
         * src: '/favicon.png'
           type: 'image/png'
@@ -43,6 +44,7 @@ async function main t
     actual: manifest get-options!
     expected:
       name: 'My App'
+      short_name: 'My App'
       icons:
         * src: '/favicon.png'
           type: 'image/png'
