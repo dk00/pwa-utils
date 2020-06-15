@@ -2,7 +2,8 @@ import
   path: {join}
   webpack
   './run-webpack': run-webpack
-  'extract-text-webpack-plugin': ExtractTextPlugin
+  'pnp-webpack-plugin': PnpWebpackPlugin
+  'mini-css-extract-plugin': MiniCssExtractPlugin
   '../src/generate-web-app': GenerateWebApp
 
 function load-index fs
@@ -15,15 +16,16 @@ async function main t
   options =
     entry: \./test/fixtures/entry.js
     output: path: output-path
+    resolve: plugins: [PnpWebpackPlugin]
+    resolve-loader: plugins: [PnpWebpackPlugin.module-loader module]
     module: rules:
       * test: /\.css$/
         use:
-          * loader: \file-loader options: name: '[name].css'
-          \extract-loader
+          MiniCssExtractPlugin.loader
           \css-loader
       ...
     plugins:
-      new ExtractTextPlugin \styles.css
+      new MiniCssExtractPlugin \styles.css
       new GenerateWebApp prefix: '' content: -> \content
     optimization:
       runtime-chunk: \single
