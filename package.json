@@ -29,29 +29,37 @@
     "lib"
   ],
   "devDependencies": {
-    "@babel/core": "",
-    "@babel/plugin-transform-react-jsx": "",
-    "@babel/plugin-transform-modules-commonjs": "",
-    "@babel/register": "",
-    "babel-preset-upcoming": "",
-    "babel-plugin-istanbul": "",
-    "babel-plugin-livescript": "",
-    "cheerio": "",
-    "css-loader": "",
-    "extract-loader": "",
-    "extract-text-webpack-plugin": "next",
-    "file-loader": "",
-    "memory-fs": "",
-    "nyc": "",
-    "preact": "",
-    "preact-render-to-string": "",
-    "riteway": "",
-    "rollup": "",
-    "rollup-plugin-babel": "4.0.0-beta.8",
-    "rollup-plugin-node-resolve": "",
-    "webpack": ""
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
+    "@babel/plugin-transform-react-jsx": "^7.10.1",
+    "@babel/register": "^7.10.1",
+    "@rollup/plugin-babel": "^5.0.3",
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-livescript": "^0.0.3",
+    "babel-preset-upcoming": "^7.4.1",
+    "cheerio": "^1.0.0-rc.3",
+    "css-loader": "^3.6.0",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.0.0",
+    "livescript": "1.5.0",
+    "memory-fs": "^0.5.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "nyc": "^15.1.0",
+    "pnp-webpack-plugin": "^1.6.4",
+    "preact": "^10.4.4",
+    "preact-render-to-string": "^5.1.9",
+    "riteway": "^6.1.2",
+    "rollup": "^2.16.1",
+    "webpack": "^4.43.0"
   },
   "peerDependencies": {
     "preact-render-to-string": ""
+  },
+  "installConfig": {
+    "pnp": true
+  },
+  "dependencies": {
+    "rollup-plugin-pnp-resolve": "^2.0.0"
   }
 }

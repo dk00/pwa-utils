@@ -1,3 +1,4 @@
+.pnp*
 node_modules
 dist
 es

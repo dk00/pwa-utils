@@ -1,6 +1,6 @@
 # pwa-utils
 
-[![build status](https://travis-ci.org/dk00/pwa-utils.svg)](//travis-ci.org/dk00/pwa-utils)
+[![build status](https://github.com/dk00/pwa-utils/workflows/build/badge.svg)](https://github.com/dk00/pwa-utils/actions)
 [![coverage](https://codecov.io/gh/dk00/pwa-utils/branch/master/graph/badge.svg)](//codecov.io/gh/dk00/pwa-utils)
 [![npm](https://img.shields.io/npm/v/pwa-utils.svg)](//npm.im/pwa-utils)
 [![dependencies](https://david-dm.org/dk00/pwa-utils/status.svg)](//david-dm.org/dk00/pwa-utils)

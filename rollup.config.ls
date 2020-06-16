@@ -1,19 +1,23 @@
 import
-  \rollup-plugin-node-resolve : resolve
-  \rollup-plugin-babel : babel
+  'rollup-plugin-pnp-resolve': pnp-resolve
+  '@rollup/plugin-node-resolve' : resolve
+  '@rollup/plugin-babel' : babel
+
+package-config = require './package.json'
 
 targets =
-  * \src/index.ls \dist/index.esm.js \es
-  * \src/index.ls \dist/index.js \iife
-  * \src/index.ls \lib/index.js \cjs
+  * \src/index.ls \es package-config.module
+  * \src/index.ls \iife package-config.unpkg
+  * \src/index.ls \cjs package-config.main
 
-name = \PWA
+name = \PwaUtils
 
-config-list = targets.map ([input, output, format]) ->
+config-list = targets.map ([input, format, output]) ->
   input: input
   output: {name, file: output, format, sourcemap: true strict: false}
   plugins:
+    pnp-resolve!
     resolve jsnext: true extensions: <[.ls .jsx]>
-    babel!
+    babel extensions: ['.ls' '.jsx' '.js'] babel-helpers: \runtime skip-preflight-check: true
 
 export default: config-list
